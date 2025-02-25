@@ -1,4 +1,5 @@
 import time
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -20,8 +21,8 @@ def addMileage(listCars):
         itemLink = BeautifulSoup(requests.get(base_url.rstrip('/') + '/' + link.lstrip('/'), headers=headers).content, 'html.parser')
 
 
-        mileage = itemLink.find('span')
-
+        mileage = itemLink.find('span', title = re.compile('KM'))
+            
         print(mileage)
 
 
