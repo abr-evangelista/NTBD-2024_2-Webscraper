@@ -11,7 +11,7 @@ base_url = 'https://www.carpages.ca/'
 # Fazer a requisição HTTP
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'}
 
-#Adiciona Kilometragem a lista de carros
+#Adiciona Kilometragem a lista de carros especificamente no dicionario
 def addMileage(listCars):
     
     for listCar in listCars:
@@ -22,9 +22,12 @@ def addMileage(listCars):
 
 
         mileage = itemLink.find('span', title = re.compile('KM'))
-            
-        print(mileage)
+        
 
+        if mileage:
+            listCar['mileage'] = mileage.text
+        else:
+            listCar['mileage'] = '0 KM'
 
 #Lista os carros em uma página
 def accessPageCars (soup):
@@ -136,6 +139,7 @@ if responseMain.status_code == 200:
 
             addMileage(listCars)
 
+            
 
 else:
     print(f"Erro ao acessar a página: {responseMain.status_code}")
