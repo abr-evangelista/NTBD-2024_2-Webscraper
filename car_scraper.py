@@ -1,3 +1,4 @@
+import json
 import time
 import re
 import requests
@@ -139,6 +140,8 @@ if responseMain.status_code == 200:
 
             addMileage(listCars)
 
+    with open("rawcardata.json", "w") as file:
+        json.dump(listCars, file)
             
 
 else:
