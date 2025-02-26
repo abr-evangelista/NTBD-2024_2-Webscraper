@@ -18,22 +18,6 @@ for resultado in resultados:
     print(resultado[0])
 print("----------------------------")
 
-#Consulta 2
-cursor.executescript("""
-    SELECT L.Nome_modelo, C.cor, COUNT(*) AS Numero_de_vendas
-    FROM Venda V
-    JOIN Veiculo L ON V.PK_Veiculo = L.PK_Veiculo
-    JOIN Cores Co ON L.ID_Cores = Co.ID_cores
-    JOIN Cor C ON Co.ID_cor = C.pk_cor
-    GROUP BY L.Nome_modelo, C.cor
-    ORDER BY L.Nome_modelo, Numero_de_vendas DESC;
-""")
-
-resultados = cursor.fetchall()
-for resultado in resultados:
-    print(resultado[0])
-print("----------------------------")
-
 #Consulta 4
 cursor.executescript("""
     SELECT L.Marca_fabricante, L.Nome_modelo, L.Carroceria, V.Valor
